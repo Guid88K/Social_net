@@ -21,7 +21,7 @@ class SocialNetworkController extends Controller
      */
     public function index()
     {
-        $status_post = Status::all();
+        $status_post = Status::orderBy('updated_at', 'desc')->get();
 
 
         return view(
@@ -91,8 +91,8 @@ class SocialNetworkController extends Controller
      * @param  \App\SocialNetwork  $socialNetwork
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SocialNetwork $socialNetwork)
+    public function destroy()
     {
-        dd($socialNetwork);
+        
     }
 }

@@ -16,7 +16,6 @@ class StatusController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -84,8 +83,11 @@ class StatusController extends Controller
      * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Status $status)
+    public function destroy($id)
     {
-        //
+        $status = Status::find($id);
+
+        $status->delete();
+        return redirect('/');
     }
 }
