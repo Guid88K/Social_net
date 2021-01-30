@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+
+
+Route::resource('/test','TestController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'SocialNetworkController@index')->name('community.index');

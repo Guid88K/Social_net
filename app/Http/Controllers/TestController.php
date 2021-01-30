@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\SocialNetwork;
+use App\Test;
 use Illuminate\Http\Request;
-use App\Status;
 
-class SocialNetworkController extends Controller
+class TestController extends Controller
 {
-
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,13 +14,9 @@ class SocialNetworkController extends Controller
      */
     public function index()
     {
-        $status_post = Status::orderBy('updated_at', 'desc')->paginate(4);
+        $varibl = Test::orderBy('updated_at', 'desc')->get();
 
-
-        return view(
-            'pages.main_page_social_network',
-            ['status_post' => $status_post]
-        );
+        return view('test', ['varibl' => $varibl]);
     }
 
     /**
@@ -48,16 +37,21 @@ class SocialNetworkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $for_save = new Test();
+        $for_save->name = $request->name;
+        $for_save->content = $request->content;
+
+        $for_save->save();
+        return redirect('/test');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\SocialNetwork  $socialNetwork
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function show(SocialNetwork $socialNetwork)
+    public function show(Test $test)
     {
         //
     }
@@ -65,10 +59,10 @@ class SocialNetworkController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SocialNetwork  $socialNetwork
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function edit(SocialNetwork $socialNetwork)
+    public function edit(Test $test)
     {
         //
     }
@@ -77,10 +71,10 @@ class SocialNetworkController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SocialNetwork  $socialNetwork
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SocialNetwork $socialNetwork)
+    public function update(Request $request, Test $test)
     {
         //
     }
@@ -88,10 +82,11 @@ class SocialNetworkController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SocialNetwork  $socialNetwork
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Test $test)
     {
+        //
     }
 }
