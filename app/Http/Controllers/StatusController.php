@@ -60,9 +60,13 @@ class StatusController extends Controller
      * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function edit(Status $status)
+    public function edit($id)
     {
-        //
+        $status = Status::find($id);
+
+        return response()->json([
+            'data' => $status
+        ]);
     }
 
     /**
@@ -72,9 +76,18 @@ class StatusController extends Controller
      * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Status $status)
+    public function update(Request $request, $id)
     {
-        //
+        Status::updateOrCreate(
+            [
+                'id' => $id
+            ],
+            [
+                'name' => $request->name,
+            ]
+        );
+
+        return response()->json(['success' => true]);
     }
 
     /**

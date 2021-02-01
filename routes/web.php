@@ -17,12 +17,16 @@ Auth::routes();
 
 
 
-Route::resource('/test','TestController');
+Route::resource('/test', 'TestController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'SocialNetworkController@index')->name('community.index');
 Route::resource('/community', 'SocialNetworkController')->except('index');
-Route::resource('/status', 'StatusController');
+Route::resource('/status', 'StatusController')->except(['upload', 'edit']);
+
+Route::get('/status/{id}/edit', 'StatusController@edit')->name('status.edit');
+Route::post('/status/{id}', 'StatusController@update')->name('status.update');
+
 Route::get('bio', function () {
     return view('pages.bio');
 });
